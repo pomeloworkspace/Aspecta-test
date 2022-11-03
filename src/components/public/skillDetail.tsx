@@ -2,7 +2,7 @@ type Props = {
   name: string,
 }
 export const SkillDetail = ({ name }: Props) => {
-
+  // todo: chuange info by props
   return (
     <div className="md:ml-8">
       <p className="font-bold">Sources by</p>

@@ -3,6 +3,8 @@ type Props = {
   onChange: Function;
   text: Array<string>
 };
+
+// all skills 
 const chosedata = ['Artificial intelligence',
 'Deep learning',
 'Machine learring',
@@ -20,10 +22,12 @@ const chosedata = ['Artificial intelligence',
 'CSS']
 export const SkillInput = ({text,onChange}: Props) => {
   const [value, setValue] = useState<Array<string>>(text||[])
-  console.log(text)
+  
   useEffect(() => {
-    setValue(text)
+    setValue(text) // update skills
   }, [text]);
+
+  //this view of all skills view
   const skillCard = chosedata.filter(item => !value.includes(item)).map(info => 
       <div key={info} className='pl-2 pr-2 cursor-pointer bg-gray-200 border border-gray-400 rounded-md text-center flex flex-row items-center mr-2 mb-2 md:hover:bg-blue-300 active:bg-blue-300' onClick={()=>{
         let newData = [...value,info]
@@ -32,8 +36,10 @@ export const SkillInput = ({text,onChange}: Props) => {
       }}><svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13055" width="16" height="16"><path d="M828.704099 196.575729C744.096116 112.384034 631.648434 66.016073 512 66.016073s-232.1288 46.367961-316.736783 130.559656C110.624271 280.800108 64 392.831501 64 512c0 119.199462 46.624271 231.199892 131.232254 315.424271 84.607983 84.191695 197.088348 130.559656 316.736783 130.559656s232.1288-46.367961 316.704099-130.559656c84.67163-84.255342 131.295901-196.288456 131.263217-315.455235C959.967316 392.800538 913.375729 280.800108 828.704099 196.575729zM736.00086 544.00086 544.00086 544.00086l0 192c0 17.695686-14.336138 32.00086-32.00086 32.00086s-32.00086-14.303454-32.00086-32.00086L479.99914 544.00086 288.00086 544.00086c-17.664722 0-32.00086-14.336138-32.00086-32.00086s14.336138-32.00086 32.00086-32.00086l192 0L480.00086 288.00086c0-17.664722 14.336138-32.00086 32.00086-32.00086s32.00086 14.336138 32.00086 32.00086l0 192 192 0c17.695686 0 32.00086 14.336138 32.00086 32.00086S753.696546 544.00086 736.00086 544.00086z" p-id="13056" fill="#2c2c2c"></path></svg> {info} </div>
     )
   
+  //this view of seleted skills
   const seleteSkillCard = value.map((info,index) => 
     <div key={info} className='flex flex-row items-center pl-2 pr-2 border border-gray-400 rounded-md text-center mr-2 cursor-pointer mb-1 hover:border-blue-900' onClick={()=>{
+      // delete a skill
       let newData = [...value]
       newData.splice(index, 1)
       setValue(newData)

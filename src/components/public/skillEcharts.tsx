@@ -1,3 +1,4 @@
+
 import * as echarts from 'echarts';
 import { useEffect, useState } from 'react';
 type Skill = {
@@ -7,10 +8,13 @@ type Skill = {
 }
 
 type Props = {
-  skills: Array<Skill>
+  skills: Array<Skill>,
+  onChange: Function
 };
 export const SkillEcharts = ({skills}:Props) => {
   const getOptions=(list:Array<Skill>)=>{
+
+    // set initial data : sources.length > 0
     let indicator = list.filter(info=>info.sources.length>0).map(item=>{
         return {
           text: item.name,
@@ -80,6 +84,7 @@ export const SkillEcharts = ({skills}:Props) => {
       option && myChart.setOption(option);
       myChart.on('click', function (params) {
         console.log(params)
+        //TODO
       });
     }
    

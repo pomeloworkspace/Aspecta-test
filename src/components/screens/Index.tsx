@@ -14,6 +14,8 @@ function Index() {
   const [academic, setAcademic] = useState('')
 
   const navigate = useNavigate();
+
+  // api: assess_candidates
   const [{ response, loading, error }, executePost] = useAxios(
     {
       url: "/assess_candidates",
@@ -27,10 +29,12 @@ function Index() {
   const [value, setSkillInfo] = useAtom(skillInfo);
   
   const getSkill = () => {
+    // check values 
     if(!candidates || !github || !stackoverflow || !academic){
       alert('Please Inter')
       return
     }
+    // post api
     executePost({
       data: {
         "skill_names": skill_names, 
@@ -57,9 +61,10 @@ function Index() {
   }
   useEffect(() => {
       if (response) {
+        // request return ok && save result
         setSkillInfo(() => response);
         sessionStorage.skillInfo = JSON.stringify(response.data)
-        // alert(value)
+        // go to skills card page
         navigate("/skill")
       }
   }, [response]);
@@ -68,11 +73,13 @@ function Index() {
       <Head title="TOP PAGE" />
       <div className="min-h-screen p-3 flex flex-col items-center">
         <div className="w-full md:w-4/5  lg:w-3/5">
+          {/* top */}
           <div className='flex flex-row justify-end flex-wrap mb-6'>
             <button className="btn btn-sm btn-ghost rounded-full btn-active mt-2 w-48 text-gray-400">Candidate Search</button>
             <button className="btn btn-sm btn-warning bg-yellow-300 border-0 rounded-full mt-2 ml-2 w-48 text-gray-900">Candidate Assessment </button>
           </div>
           
+          {/* form */}
           <div className='mt-2'>
             <MyInput text={candidates} name="Name" placeholder="Inter Candidate Name" require={true} onChange={(e: string) => {
               setCandidates(e)
