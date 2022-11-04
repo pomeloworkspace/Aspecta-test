@@ -12,6 +12,8 @@ function Index() {
   const [github, setgithub] = useState('')
   const [stackoverflow, setStackoverflow] = useState('')
   const [academic, setAcademic] = useState('')
+  const [linkedin, setlinkedin] = useState('')
+  
 
   const navigate = useNavigate();
 
@@ -25,13 +27,18 @@ function Index() {
   )
   if(error) {
     console.log(error)
+    // alert(error)
   }
   const [value, setSkillInfo] = useAtom(skillInfo);
   
   const getSkill = () => {
     // check values 
-    if(!candidates || !github || !stackoverflow || !academic){
-      alert('Please Inter')
+    if(!candidates){
+      alert('Please Enter candidates')
+      return
+    }
+    if(!github && !stackoverflow && !academic){
+      alert('Please Enter at least one URL')
       return
     }
     // post api
@@ -41,10 +48,7 @@ function Index() {
         "candidates": [{
                         "identifier": candidates, 
                         "accounts": {
-                          "github": github, 
-                          "stackoverflow": stackoverflow,
-                          "linkedin": "",
-                          "academic": academic
+                          "github": github, "stackoverflow":stackoverflow, "linkedin": linkedin, "academic": academic
                         }
                       }], 
         "appid": "bc17818b-d70e-4883-8148-74a2bea56674"
@@ -93,8 +97,11 @@ function Index() {
             <MyInput text={github} name="Github Account URL" tips="Github Account URL" placeholder="Inter Github Account URL" onChange={(e: string) => {
               setgithub(e)
             }} />
-            <MyInput text={stackoverflow} name="Stack Overflow Account URL" tips="Stack Stack Overflow Account URL" placeholder="Inter Candidate Name" onChange={(e: string) => {
+            <MyInput text={stackoverflow} name="Stack Overflow Account URL" tips="Stack Overflow Account URL" placeholder="Inter Stack Overflow Account URL" onChange={(e: string) => {
               setStackoverflow(e)
+            }} />
+            <MyInput text={linkedin} name="Linkedin URL" tips="Linkedin Account URL" placeholder="Inter Linkedin Account" onChange={(e: string) => {
+              setlinkedin(e)
             }} />
             <div className="divider"></div> 
 
