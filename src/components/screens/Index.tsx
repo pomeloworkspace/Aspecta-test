@@ -62,6 +62,7 @@ function Index() {
     setgithub('')
     setStackoverflow('')
     setAcademic('')
+    setlinkedin('')
   }
   useEffect(() => {
       if (response) {
